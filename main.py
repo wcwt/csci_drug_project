@@ -1,8 +1,8 @@
 import pickle
 #import numpy as np
-#import torch
 
-train_file = "../source_file/csci_data/SR-ARE-train/names_onehots.pickle"
+
+train_file = "SR-ARE-train/names_onehots.pickle"
 
 with open (train_file,"rb") as f:
     obj = pickle.load(f)
