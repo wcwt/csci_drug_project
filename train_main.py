@@ -1,6 +1,7 @@
 import pickle
-#import numpy as np
-#import torch
+import tensorflow
+import keras
+
 
 train_file = "../source_file/csci_data/SR-ARE-train/names_onehots.pickle"
 
@@ -9,4 +10,4 @@ with open (train_file,"rb") as f:
 
 structure,name = obj['onehots'],obj['names']
 
-print(structure)
+print(name)
