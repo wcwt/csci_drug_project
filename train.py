@@ -29,7 +29,7 @@ def train(feature,label):
         ]
     # https://www.tensorflow.org/api_docs/python/tf/keras/losses for loss function
     )
-    model.compile(optimizer = 'adam',loss="CategoricalCrossentropy",metrics=['accuracy'])
+    model.compile(optimizer = 'adam',loss="mse",metrics=['accuracy'])
 
     model.fit(feature,label,epochs=10)
 
