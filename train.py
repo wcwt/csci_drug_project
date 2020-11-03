@@ -21,17 +21,22 @@ def dataloader(mode = "train"):
     toxic_label = np.array(label_data[:,1],dtype=int) # get {0,1} form name
     return feature,name,toxic_label
 
+def create_model():
+        # Define Sequential model with 3 layers
+        model = keras.Sequential(
+            [
+                layers.Flatten(input_shape = (70,325)),
+                layers.Dense(size, activation="relu", name="layer1"),
+                layers.Dense(32, activation="relu",name="layer2"),
+                layers.Dense(2, activation="softmax", name="output"),
+            ]
+        # https://www.tensorflow.org/api_docs/python/tf/keras/losses for loss function
+        )
+        return model
+
 def train(train_feature,train_label,test_feature,test_label):
-    # Define Sequential model with 3 layers
-    model = keras.Sequential(
-        [
-            layers.Flatten(input_shape = (70,325)),
-            layers.Dense(size, activation="relu", name="layer1"),
-            layers.Dense(32, activation="relu",name="layer2"),
-            layers.Dense(2, activation="softmax", name="output"),
-        ]
-    # https://www.tensorflow.org/api_docs/python/tf/keras/losses for loss function
-    )
+    model = create_model()
+    
     model.compile(optimizer = 'adam',loss = 'sparse_categorical_crossentropy',metrics=['accuracy'])
 
     model.fit(train_feature,train_label,epochs=1,shuffle=True)
