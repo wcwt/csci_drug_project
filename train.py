@@ -40,5 +40,5 @@ def main():
     feature,name,toxic_label = dataloader()
     train(feature,toxic_label)
 
-if __name__ == "__main__":
-    main()
+#if __name__ == "__main__":
+main()
