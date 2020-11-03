@@ -33,7 +33,7 @@ def train(feature,label):
 
     model.fit(feature,label,epochs=10)
 
-    test_loss,test_acc = model.evaluate(feature,label,verbose=1)
+    test_loss,test_acc = model.evaluate(feature,label,verbose=10)
     print(f"loss = {test_loss}, acc = {test_acc}")
 
 def main():
