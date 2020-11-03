@@ -22,23 +22,8 @@ def dataloader(mode = "train"):
     toxic_label = np.array(label_data[:,1],dtype=int) # get {0,1} form name
     return feature,name,toxic_label
 
-def create_model():
-        # Define Sequential model with 3 layers
-        model = keras.Sequential(
-            [
-                layers.Flatten(input_shape = (70,325)),
-                layers.Dense(size, activation="relu", name="layer1"),
-                layers.Dense(32, activation="relu",name="layer2"),
-                layers.Dense(2, activation="softmax", name="output"),
-            ]
-        # https://www.tensorflow.org/api_docs/python/tf/keras/losses for loss function
-        )
-        return model
-
-new_model = tf.keras.models.load_model('./model')
-
-# Restore the weights
+model = tf.keras.models.load_model('modle.md')
 
 test_feature,test_name,test_toxic_label = dataloader("test")
 # Evaluate the model
-loss,acc = new_model.evaluate(test_feature, test_toxic_label, verbose=2)
+loss,acc = model.evaluate(test_feature, test_toxic_label, verbose=2)
