@@ -20,7 +20,7 @@ def dataloader(path):
     toxic_label = np.array(label_data[:,1],dtype=int) # get {0,1} form name
     return feature,name,toxic_label
 
-model = tf.keras.models.load_model('modle.md/')
+model = tf.keras.models.load_model('modle.md')
 
 test_feature,test_name,test_toxic_label = dataloader(test_path)
 
