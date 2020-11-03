@@ -39,7 +39,7 @@ def train(train_feature,train_label,test_feature,test_label):
 
     model.compile(optimizer = 'adam',loss = 'sparse_categorical_crossentropy',metrics=['accuracy'])
 
-    model.fit(train_feature,train_label,epochs=1,shuffle=True)
+    model.fit(train_feature,train_label,epochs=1,shuffle=True,batch_size=10)
 
     test_loss,test_acc = model.evaluate(test_feature,test_label,verbose=10)
     print(f"loss = {test_loss}, acc = {test_acc}")
@@ -51,7 +51,7 @@ def train(train_feature,train_label,test_feature,test_label):
 def main():
     train_feature,train_name,train_toxic_label = dataloader("train")
     test_feature,test_name,test_toxic_label = dataloader("test")
-    train(train_feature[:100],train_toxic_label[:100],test_feature,test_toxic_label)
+    train(train_feature,train_toxic_label,test_feature,test_toxic_label)
 
 if __name__ == "__main__":
     main()

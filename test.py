@@ -26,4 +26,6 @@ model = tf.keras.models.load_model('modle.md')
 
 test_feature,test_name,test_toxic_label = dataloader("test")
 # Evaluate the model
-loss,acc = model.evaluate(test_feature, test_toxic_label, verbose=2)
+#loss,acc = model.evaluate(test_feature, test_toxic_label, verbose=2)
+predict = model.evaluate(test_feature)
+print(predict)
