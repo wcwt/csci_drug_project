@@ -8,4 +8,11 @@ with open (train_file,"rb") as f:
 
 feature,name = obj['onehots'],obj['names']
 
-print(feature)
+#print(feature[0])
+pos = 0
+neg = 0
+for label in name:
+    if label[-1] == '1':
+        pos += 1
+    else:
+        print(label)
