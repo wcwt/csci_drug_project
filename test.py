@@ -40,7 +40,7 @@ model.load_weights('modle/modle.w')
 model.summary()
 test_feature,test_name,test_toxic_label = dataloader(test_path)
 
-predict = model.predict(test_feature)
+predict = model.predict(test_feature[:3])
 print(predict)
 """
 
