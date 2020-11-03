@@ -35,12 +35,11 @@ def create_model():
         )
         return model
 
-
 model = create_model()
 
 # Restore the weights
 model.load_weights('./')
 
-test_feature,test_label = dataloader("test")
+test_feature,test_name,test_toxic_label = dataloader("test")
 # Evaluate the model
-loss,acc = model.evaluate(test_feature, test_label, verbose=2)
+loss,acc = model.evaluate(test_feature, test_toxic_label, verbose=2)
