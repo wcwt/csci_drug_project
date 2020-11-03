@@ -38,7 +38,7 @@ def create_model():
 model = create_model()
 
 # Restore the weights
-model.load_weights('./')
+model.load_weights(tf.train.latest_checkpoint('./'))
 
 test_feature,test_name,test_toxic_label = dataloader("test")
 # Evaluate the model
