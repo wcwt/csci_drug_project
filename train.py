@@ -38,8 +38,7 @@ def train(feature,label):
 
 def main():
     feature,name,toxic_label = dataloader()
-    #train(feature,toxic_label)
-    print(toxic_label)
+    train(feature,toxic_label)
 
 if __name__ == "__main__":
     main()
