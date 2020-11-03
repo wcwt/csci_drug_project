@@ -19,12 +19,12 @@ def dataloader(path):
     label_data = np.loadtxt(label_in,dtype=str,delimiter=',')
     toxic_label = np.array(label_data[:,1],dtype=int) # get {0,1} form name
     return feature,name,toxic_label
-    
+
 def create_model():
         # Define Sequential model with 3 layers
         model = keras.Sequential(
             [
-                layers.Flatten(input_shape = (70,325)),
+                layers.Flatten(input_shape = (1,)),
                 layers.Dense(size, activation="relu", name="layer1"),
                 layers.Dense(32, activation="relu",name="layer2"),
                 layers.Dense(2, activation="softmax", name="output"),
@@ -39,7 +39,7 @@ model = create_model()
 model.load_weights('modle/modle.w')
 model.summary()
 test_feature,test_name,test_toxic_label = dataloader(test_path)
-predict = model.evaluate(test_feature[:3])
+predict = model.predict(test_feature[:3])
 """
 
 with open (file_out,"w+") as f:

@@ -31,7 +31,7 @@ def create_model():
             ]
         # https://www.tensorflow.org/api_docs/python/tf/keras/losses for loss function
         )
-        
+
         model.compile(optimizer = 'adam',loss = 'sparse_categorical_crossentropy',metrics=['accuracy'])
         return model
 
