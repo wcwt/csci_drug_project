@@ -36,7 +36,7 @@ def create_model():
 
 def train(train_feature,train_label,test_feature,test_label):
     model = create_model()
-    
+
     model.compile(optimizer = 'adam',loss = 'sparse_categorical_crossentropy',metrics=['accuracy'])
 
     model.fit(train_feature,train_label,epochs=1,shuffle=True)
@@ -45,7 +45,7 @@ def train(train_feature,train_label,test_feature,test_label):
     print(f"loss = {test_loss}, acc = {test_acc}")
     #with open("model.pk","wb+") as f:
     #    pickle.dump(model,f)
-    model.save_weights('./')
+    model.save('./model')
 def main():
     train_feature,train_name,train_toxic_label = dataloader("train")
     test_feature,test_name,test_toxic_label = dataloader("test")
