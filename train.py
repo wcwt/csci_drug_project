@@ -51,7 +51,7 @@ def train(train_feature,train_label,test_feature,test_label):
 def main():
     train_feature,train_name,train_toxic_label = dataloader("train")
     test_feature,test_name,test_toxic_label = dataloader("test")
-    train(train_feature,train_toxic_label,test_feature,test_toxic_label)
+    train(train_feature[:100],train_toxic_label[:100],test_feature,test_toxic_label)
 
 if __name__ == "__main__":
     main()
