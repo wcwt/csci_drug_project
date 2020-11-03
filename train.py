@@ -34,7 +34,7 @@ def train(train_feature,train_label,test_feature,test_label):
     )
     model.compile(optimizer = 'adam',loss = 'sparse_categorical_crossentropy',metrics=['accuracy'])
 
-    model.fit(train_feature,train_label,epochs=2,shuffle=True)
+    model.fit(train_feature,train_label,epochs=3,shuffle=True)
 
     test_loss,test_acc = model.evaluate(test_feature,test_label,verbose=10)
     print(f"loss = {test_loss}, acc = {test_acc}")
