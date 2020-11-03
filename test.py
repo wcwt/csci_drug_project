@@ -35,7 +35,7 @@ def create_model():
         )
         return model
 
-new_model = tf.keras.models.load_model('./checkpoint')
+new_model = tf.keras.models.load_model('./')
 
 # Restore the weights
 model.load_weights(tf.train.latest_checkpoint('./'))
