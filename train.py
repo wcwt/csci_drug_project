@@ -9,8 +9,7 @@ test_path = "../source_file/csci_data/SR-ARE-test/"
 
 size = 70*325
 
-def dataloader(mode = "train"):
-    path = train_path if mode == "train" else test_path
+def dataloader(path):
     pickle_in = path + "names_onehots.pickle"
     label_in = path + "names_labels.txt"
     # load data from file
@@ -46,8 +45,8 @@ def train(train_feature,train_label,test_feature,test_label):
     model.save('modle.md')
 
 def main():
-    train_feature,train_name,train_toxic_label = dataloader("train")
-    test_feature,test_name,test_toxic_label = dataloader("test")
+    train_feature,train_name,train_toxic_label = dataloader(train_path)
+    test_feature,test_name,test_toxic_label = dataloader(test_path)
     train(train_feature[:10],train_toxic_label[:10],test_feature,test_toxic_label)
 
 if __name__ == "__main__":
