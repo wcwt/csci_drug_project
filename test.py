@@ -1,18 +1,23 @@
 import numpy as np
 import pickle
 
-train_file = "../source_file/csci_data/SR-ARE-train/names_onehots.pickle"
+path = "../source_file/csci_data/SR-ARE-train/"
+pickle_in = path + "names_onehots.pickle"
+label_in = path + "names_labels.txt"
 
-with open (train_file,"rb") as f:
-    obj = pickle.load(f)
+def dataloader():
+    # load data part
+    with open (pickle_in,"rb") as f:
+        obj = pickle.load(f)
+    feature,name = obj['onehots'],obj['names']
+    label_data = np.loadtxt(label_in,dtype=str,delimiter=',')
+    toxic_label = label_data[:,0] # get {0,1} form name
+    return feature,name,toxic_label
 
-feature,name = obj['onehots'],obj['names']
+def main():
+    feature,name,toxic_label = dataloader()
+    print(feature[0])
 
-#print(feature[0])
-pos = 0
-neg = 0
-for label in name:
-    if label[-1] == '1':
-        pos += 1
-    else:
-        print(label)
+
+if __name__ == "__main__":
+    main()

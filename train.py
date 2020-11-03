@@ -3,20 +3,26 @@ from tensorflow import keras
 from tensorflow.keras import layers
 import pickle
 
-train_file = "../source_file/csci_data/SR-ARE-train/names_onehots.pickle"
+import numpy as np
+import pickle
 
-with open (train_file,"rb") as f:
-    obj = pickle.load(f)
+path = "../source_file/csci_data/SR-ARE-train/"
+pickle_in = path + "names_onehots.pickle"
+label_in = path + "names_labels.txt"
 
-feature,name = obj['onehots'],obj['names']
+def dataloader():
+    # load data part
+    with open (pickle_in,"rb") as f:
+        obj = pickle.load(f)
+    feature,name = obj['onehots'],obj['names']
+    label_data = np.loadtxt(label_in,dtype=str,delimiter=',')
+    toxic_label = label_data[:,0] # get {0,1} form name
+    return feature,name,toxic_label
 
-batch_size = 32
+def main():
+    feature,name,toxic_label = dataloader()
+    print(feature[0])
 
-"""
-train_dataset = tf.data.experimental.make_csv_dataset(
-    train_dataset_fp,
-    batch_size,
-    column_names=column_names,
-    label_name=label_name,
-    num_epochs=1)
-"""
+
+if __name__ == "__main__":
+    main()
