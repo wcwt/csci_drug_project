@@ -38,7 +38,7 @@ def train(train_feature,train_label,test_feature,test_label):
 
     test_loss,test_acc = model.evaluate(test_feature,test_label,verbose=10)
     print(f"loss = {test_loss}, acc = {test_acc}")
-    with open("model.pk","wb+") as f
+    with open("model.pk","wb+") as f:
         pickle.dump(model,f)
 
 def main():
