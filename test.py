@@ -5,7 +5,7 @@ from tensorflow import keras
 from tensorflow.keras import layers
 import os
 
-
+file_out = "labels.txt"
 train_path = "../source_file/csci_data/SR-ARE-train/"
 test_path = "../source_file/csci_data/SR-ARE-test/"
 size = 70*325
@@ -22,10 +22,12 @@ def dataloader(mode = "train"):
     toxic_label = np.array(label_data[:,1],dtype=int) # get {0,1} form name
     return feature,name,toxic_label
 
-model = tf.keras.models.load_model('modle.md')
+model = tf.keras.models.load_model('modle.md/')
 
 test_feature,test_name,test_toxic_label = dataloader("test")
 # Evaluate the model
 #loss,acc = model.evaluate(test_feature, test_toxic_label, verbose=2)
 predict = model.evaluate(test_feature[:3])
-print(predict)
+with open (file_out,"w+") as f:
+    for d in predict:
+        f.write(f"{int(d)}\n")
