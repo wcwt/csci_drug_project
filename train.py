@@ -42,7 +42,7 @@ def train(train_feature,train_label,test_feature,test_label):
 
     test_loss,test_acc = model.evaluate(test_feature,test_label,verbose=10)
 
-    model.save('modle.md')
+    model.save('modle.md/')
 
 def main():
     train_feature,train_name,train_toxic_label = dataloader(train_path)
