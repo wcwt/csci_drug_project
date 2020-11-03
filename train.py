@@ -31,12 +31,13 @@ def create_model():
             ]
         # https://www.tensorflow.org/api_docs/python/tf/keras/losses for loss function
         )
+        
+        model.compile(optimizer = 'adam',loss = 'sparse_categorical_crossentropy',metrics=['accuracy'])
         return model
 
 def train(train_feature,train_label,test_feature,test_label):
     model = create_model()
 
-    model.compile(optimizer = 'adam',loss = 'sparse_categorical_crossentropy',metrics=['accuracy'])
 
     model.fit(train_feature,train_label,epochs=1,shuffle=True,batch_size=10)
 

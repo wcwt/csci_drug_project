@@ -19,6 +19,7 @@ def dataloader(path):
     label_data = np.loadtxt(label_in,dtype=str,delimiter=',')
     toxic_label = np.array(label_data[:,1],dtype=int) # get {0,1} form name
     return feature,name,toxic_label
+    
 def create_model():
         # Define Sequential model with 3 layers
         model = keras.Sequential(
@@ -30,6 +31,8 @@ def create_model():
             ]
         # https://www.tensorflow.org/api_docs/python/tf/keras/losses for loss function
         )
+
+        model.compile(optimizer = 'adam',loss = 'sparse_categorical_crossentropy',metrics=['accuracy'])
         return model
 
 model = create_model()
