@@ -12,9 +12,11 @@ feature,name = obj['onehots'],obj['names']
 
 batch_size = 32
 
+"""
 train_dataset = tf.data.experimental.make_csv_dataset(
     train_dataset_fp,
     batch_size,
     column_names=column_names,
     label_name=label_name,
     num_epochs=1)
+"""
