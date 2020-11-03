@@ -39,7 +39,9 @@ model = create_model()
 model.load_weights('modle/modle.w')
 model.summary()
 test_feature,test_name,test_toxic_label = dataloader(test_path)
-predict = model.predict(test_feature[:3])
+for feature in test_feature:
+    predict = model.predict(feature)
+    print(predict)
 """
 
 with open (file_out,"w+") as f:
