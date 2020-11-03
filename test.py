@@ -35,10 +35,10 @@ def create_model():
         )
         return model
 
-new_model = tf.keras.models.load_model()
+new_model = tf.keras.models.load_model('./model')
 
 # Restore the weights
-model.load_weights(tf.train.latest_checkpoint('./model'))
+
 
 test_feature,test_name,test_toxic_label = dataloader("test")
 # Evaluate the model
