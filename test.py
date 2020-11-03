@@ -44,4 +44,4 @@ predict = model.predict(test_feature[:3])
 
 with open (file_out,"w+") as f:
     for d in predict:
-        f.write(f"{argmax(d)}\n")
+        f.write(f"{np.argmax(d)}\n")
