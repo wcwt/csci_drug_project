@@ -23,10 +23,10 @@ def dataloader(path):
 model = tf.keras.models.load_model('modle.md')
 
 model.summary()
-"""
 test_feature,test_name,test_toxic_label = dataloader(test_path)
-
 predict = model.evaluate(test_feature[:3])
+"""
+
 with open (file_out,"w+") as f:
     for d in predict:
         f.write(f"{int(d)}\n")
