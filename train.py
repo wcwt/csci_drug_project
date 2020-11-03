@@ -38,7 +38,6 @@ def create_model():
 def train(train_feature,train_label,test_feature,test_label):
     model = create_model()
 
-
     model.fit(train_feature,train_label,epochs=1,shuffle=True,batch_size=10)
 
     test_loss,test_acc = model.evaluate(test_feature,test_label,verbose=10)
@@ -48,7 +47,7 @@ def train(train_feature,train_label,test_feature,test_label):
 def main():
     train_feature,train_name,train_toxic_label = dataloader(train_path)
     test_feature,test_name,test_toxic_label = dataloader(test_path)
-    train(train_feature[:10],train_toxic_label[:10],test_feature,test_toxic_label)
+    train(train_feature[],train_toxic_label[],test_feature,test_toxic_label)
 
 if __name__ == "__main__":
     main()
