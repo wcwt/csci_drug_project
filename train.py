@@ -31,14 +31,15 @@ def train(feature,label):
     )
     model.compile(optimizer = 'adam',loss='BinaryCrossentropy',metrics=['accuracy'])
 
-    model.fit(feature,label,epochs=100)
+    model.fit(feature,label,epochs=10)
 
     test_loss,test_acc = model.evaluate(feature,label,verbose=1)
     print(f"loss = {test_loss}, acc = {test_acc}")
 
 def main():
     feature,name,toxic_label = dataloader()
-    train(feature,toxic_label)
+    #train(feature,toxic_label)
+    print(toxic_label)
 
 if __name__ == "__main__":
     main()
