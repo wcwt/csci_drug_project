@@ -24,7 +24,7 @@ def create_model():
         # Define Sequential model with 3 layers
         model = keras.Sequential(
             [
-                layers.Flatten(input_shape = (1,)),
+                layers.Flatten(input_shape = (70,325)),
                 layers.Dense(size, activation="relu", name="layer1"),
                 layers.Dense(32, activation="relu",name="layer2"),
                 layers.Dense(2, activation="softmax", name="output"),
