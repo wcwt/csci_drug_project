@@ -31,7 +31,7 @@ def train(feature,label):
     )
     model.compile(optimizer = 'adam',loss='BinaryCrossentropy',metrics=['accuracy'])
 
-    model.fit(feature,label,epochs=10)
+    model.fit(feature,label,epochs=100)
 
     test_loss,test_acc = model.evaluate(feature,label,verbose=1)
     print(f"loss = {test_loss}, acc = {test_acc}")
