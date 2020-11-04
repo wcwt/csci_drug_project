@@ -1,53 +1,46 @@
 import numpy as np
 import pickle
 import function as f
+import os
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
+import matplotlib.pyplot as plt
 
 train_path = "../source_file/csci_data/SR-ARE-train/"
 test_path = "../source_file/csci_data/SR-ARE-test/"
 
-"""
-def dataloader(path):
-    pickle_in = path + "names_onehots.pickle"
-    label_in = path + "names_labels.txt"
-    # load data from file
-    with open (pickle_in,"rb") as f:
-        obj = pickle.load(f)
-    feature,name = obj['onehots'],obj['names']
-    label_data = np.loadtxt(label_in,dtype=str,delimiter=',')
-    toxic_label = np.array(label_data[:,1],dtype=int) # get {0,1} form name
-    return feature,name,toxic_label
+def test(test,predict):
+    p = []
+    for pred in predict:    p.append(np.argmax(pred))
+    x = range(len(test))
+    fig, axs = plt.subplots(2)
+    fig.suptitle('Vertically stacked subplots')
+    axs[0].scatter(x, test,s=0.5)
+    axs[1].scatter(x, p,s=0.5)
+    plt.show()
 
-def create_model():
-        # Define Sequential model with 3 layers
-        model = keras.Sequential(
-            [
-                layers.Flatten(input_shape = (70,325)),
-                layers.Dense(128, activation="relu", name="layer1"),
-                layers.Dense(32, activation="relu",name="layer2"),
-                layers.Dense(2, activation="softmax", name="output"),
-            ]
-        # https://www.tensorflow.org/api_docs/python/tf/keras/losses for loss function
-        )
-
-        model.compile(optimizer = 'adam',loss = 'sparse_categorical_crossentropy',metrics=['accuracy'])
-        return model
-"""
 def train(train_feature,train_label,test_feature,test_label):
     model = f.create_model()
 
-    model.fit(train_feature,train_label,epochs=3,shuffle=True,batch_size=10)
+    model.fit(train_feature,train_label,epochs=10,shuffle=True,batch_size=10)
 
-    test_loss,test_acc = model.evaluate(test_feature,test_label,verbose=10)
-
-    model.save_weights('modle/modle.w')
+    test_loss,test_acc = model.evaluate(train_feature,train_label,verbose=10)
+    print(f"loss = {test_loss}, acc = {test_acc}")
+    if not(os.path.isdir('modle')):
+        model.save_weights('modle/modle.w')
+    return model
 
 def main():
     train_feature,train_name,train_toxic_label = f.dataloader(train_path)
     test_feature,test_name,test_toxic_label = f.dataloader(test_path)
-    train(train_feature,train_toxic_label,test_feature,test_toxic_label)
+    p_fea,p_lab, n_fea,n_lab = f.seperate_sample(train_feature,train_toxic_label)
+    feature  = np.append(p_fea,n_fea[:len(p_fea)],axis=0)
+    label = np.append(p_lab,n_lab[:len(p_fea)],axis=0)
+
+    model = train(feature,label,test_feature,test_toxic_label)
+    predict = model.predict(test_feature)
+    test(test_toxic_label,predict)
 
 if __name__ == "__main__":
     main()

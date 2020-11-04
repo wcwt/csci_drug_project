@@ -15,9 +15,18 @@ model.load_weights('modle/modle.w')
 model.summary()
 test_feature,test_name,test_toxic_label = f.dataloader(test_path)
 
+pos_result = []
+pos_label = []
+for i in range(len(test_feature)):
+    if test_toxic_label[i] == 1:
+        pos_result.append(test_feature[i])
+        pos_label.append(1)
+
+
 predict = model.predict(test_feature)
 loss,acc = model.evaluate(test_feature,test_toxic_label)
-print(f"loss = {loss}, acc = {acc}")
+
+
 with open (file_out,"w+") as f:
     for d in predict:
         f.write(f"{np.argmax(d)}\n")
