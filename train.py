@@ -25,7 +25,7 @@ def create_model():
         model = keras.Sequential(
             [
                 layers.Flatten(input_shape = (70,325)),
-                layers.Dense(size, activation="relu", name="layer1"),
+                layers.Dense(128, activation="relu", name="layer1"),
                 layers.Dense(32, activation="relu",name="layer2"),
                 layers.Dense(2, activation="softmax", name="output"),
             ]
@@ -38,7 +38,7 @@ def create_model():
 def train(train_feature,train_label,test_feature,test_label):
     model = create_model()
 
-    model.fit(train_feature,train_label,epochs=1,shuffle=True,batch_size=10)
+    model.fit(train_feature,train_label,epochs=3,shuffle=True,batch_size=10)
 
     test_loss,test_acc = model.evaluate(test_feature,test_label,verbose=10)
 

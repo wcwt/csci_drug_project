@@ -6,7 +6,8 @@ from tensorflow.keras import layers
 import os
 
 file_out = "labels.txt"
-test_path = "../source_file/csci_data/SR-ARE-test/"
+#test_path = "../source_file/csci_data/SR-ARE-test/"
+test_path = "../SR-ARE-score/"
 size = 70*325
 
 def dataloader(path):
@@ -25,7 +26,7 @@ def create_model():
         model = keras.Sequential(
             [
                 layers.Flatten(input_shape = (70,325)),
-                layers.Dense(size, activation="relu", name="layer1"),
+                layers.Dense(128, activation="relu", name="layer1"),
                 layers.Dense(32, activation="relu",name="layer2"),
                 layers.Dense(2, activation="softmax", name="output"),
             ]
@@ -40,7 +41,7 @@ model.load_weights('modle/modle.w')
 model.summary()
 test_feature,test_name,test_toxic_label = dataloader(test_path)
 
-predict = model.predict(test_feature[:3])
+predict = model.predict(test_feature)
 
 with open (file_out,"w+") as f:
     for d in predict:
