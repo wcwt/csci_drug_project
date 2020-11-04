@@ -33,8 +33,8 @@ def create_model():
     # Define Sequential model with 3 layers
     model = keras.Sequential(
         [
-            #layers.Flatten(input_shape = (70,325),name="input"),
-            layers.Conv2D(2, 3, activation='relu', input_shape=(70,325)),
+            layers.Flatten(input_shape = (70,325),name="input"),
+            #layers.Conv2D(2, 3, activation='relu', input_shape=(70,325)),
             layers.Dense(128, activation="relu", name="layer1"),
             layers.Dense(32, activation="relu",name="layer2"),
             layers.Dense(2, activation="softmax", name="output"),
@@ -43,7 +43,7 @@ def create_model():
     # https://www.tensorflow.org/api_docs/python/tf/keras/losses for loss function
 
     opt = tf.keras.optimizers.Adam(learning_rate=0.001)
-    model.compile(optimizer = opt,
+    model.compile(optimizer = 'adam',
                 #loss = 'sparse_categorical_crossentropy',
                 loss = 'binary_crossentropy',
                 metrics=['accuracy'])
