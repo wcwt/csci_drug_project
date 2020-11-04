@@ -5,7 +5,7 @@ import os
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 
 train_path = "../source_file/csci_data/SR-ARE-train/"
 test_path = "../source_file/csci_data/SR-ARE-test/"
@@ -23,7 +23,7 @@ def test(test,predict):
 def train(train_feature,train_label,test_feature,test_label):
     model = f.create_model()
 
-    model.fit(train_feature,train_label,epochs=10,shuffle=True,batch_size=10)
+    model.fit(train_feature,train_label,epochs=3,shuffle=True,batch_size=10)
 
     test_loss,test_acc = model.evaluate(train_feature,train_label,verbose=10)
     print(f"loss = {test_loss}, acc = {test_acc}")
@@ -40,7 +40,7 @@ def main():
 
     model = train(feature,label,test_feature,test_toxic_label)
     predict = model.predict(test_feature)
-    test(test_toxic_label,predict)
+    #test(test_toxic_label,predict)
 
 if __name__ == "__main__":
     main()
