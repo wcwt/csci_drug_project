@@ -5,11 +5,12 @@ import os
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
-#import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
 train_path = "../source_file/csci_data/SR-ARE-train/"
 test_path = "../source_file/csci_data/SR-ARE-test/"
 
+# test label and predice label
 def test(test,predict):
     p = []
     for pred in predict:    p.append(np.argmax(pred))
@@ -23,7 +24,7 @@ def test(test,predict):
 def train(train_feature,train_label,test_feature,test_label):
     model = f.create_model()
 
-    model.fit(train_feature,train_label,epochs=3,shuffle=True,batch_size=10)
+    model.fit(train_feature,train_label,epochs=8,shuffle=True,batch_size=10)
 
     test_loss,test_acc = model.evaluate(train_feature,train_label,verbose=10)
     print(f"loss = {test_loss}, acc = {test_acc}")
@@ -35,12 +36,22 @@ def main():
     train_feature,train_name,train_toxic_label = f.dataloader(train_path)
     test_feature,test_name,test_toxic_label = f.dataloader(test_path)
     p_fea,p_lab, n_fea,n_lab = f.seperate_sample(train_feature,train_toxic_label)
+    pt_fea,pt_lab, nt_fea,nt_lab = f.seperate_sample(test_feature,test_toxic_label)
+
     feature  = np.append(p_fea,n_fea[:len(p_fea)],axis=0)
     label = np.append(p_lab,n_lab[:len(p_fea)],axis=0)
 
+    """
+    featuret  = np.append(pt_fea,nt_fea[:len(pt_fea)],axis=0)
+    labelt = np.append(pt_lab,nt_lab[:len(pt_fea)],axis=0)
+
+    feature = np.append(feature,featuret,axis=0)
+    label = np.append(label,labelt,axis=0)
+    """
+
     model = train(feature,label,test_feature,test_toxic_label)
-    predict = model.predict(test_feature)
-    #test(test_toxic_label,predict)
+    predict = model.predict(feature)
+    test(label,predict)
 
 if __name__ == "__main__":
     main()
