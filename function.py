@@ -44,8 +44,7 @@ def create_model():
 
     opt = tf.keras.optimizers.Adam(learning_rate=0.001)
     model.compile(optimizer = 'adam',
-                #loss = 'sparse_categorical_crossentropy',
-                loss = 'binary_crossentropy',
+                loss = 'sparse_categorical_crossentropy',
+                #loss = 'binary_crossentropy',
                 metrics=['accuracy'])
-
     return model
