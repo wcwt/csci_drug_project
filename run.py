@@ -1,6 +1,5 @@
-import numpy as np
+import function as f
+test_path = "../source_file/csci_data/SR-ARE-test/"
 
-a = [0.7,0.3,4]
-b = np.argmax(a)
-
-print(b)
+a,b,c = f.dataloader(test_path)
+print(a)

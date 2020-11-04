@@ -1,5 +1,6 @@
 import numpy as np
 import pickle
+import function as f
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
@@ -7,8 +8,7 @@ from tensorflow.keras import layers
 train_path = "../source_file/csci_data/SR-ARE-train/"
 test_path = "../source_file/csci_data/SR-ARE-test/"
 
-size = 70*325
-
+"""
 def dataloader(path):
     pickle_in = path + "names_onehots.pickle"
     label_in = path + "names_labels.txt"
@@ -34,9 +34,9 @@ def create_model():
 
         model.compile(optimizer = 'adam',loss = 'sparse_categorical_crossentropy',metrics=['accuracy'])
         return model
-
+"""
 def train(train_feature,train_label,test_feature,test_label):
-    model = create_model()
+    model = f.create_model()
 
     model.fit(train_feature,train_label,epochs=3,shuffle=True,batch_size=10)
 
@@ -45,8 +45,8 @@ def train(train_feature,train_label,test_feature,test_label):
     model.save_weights('modle/modle.w')
 
 def main():
-    train_feature,train_name,train_toxic_label = dataloader(train_path)
-    test_feature,test_name,test_toxic_label = dataloader(test_path)
+    train_feature,train_name,train_toxic_label = f.dataloader(train_path)
+    test_feature,test_name,test_toxic_label = f.dataloader(test_path)
     train(train_feature,train_toxic_label,test_feature,test_toxic_label)
 
 if __name__ == "__main__":
