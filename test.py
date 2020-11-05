@@ -13,6 +13,7 @@ test_path = "../SR-ARE-score/"
 model = f.create_model()
 model.load_weights('modle/modle.w')
 model.summary()
+
 test_feature,test_name = f.dataloader(test_path,label_exist=False)
 
 predict = model.predict(test_feature)

@@ -10,16 +10,18 @@ import matplotlib.pyplot as plt
 train_path = "../source_file/csci_data/SR-ARE-train/"
 test_path = "../source_file/csci_data/SR-ARE-test/"
 
+
 # test label and predice label
 def test(test,predict):
     p = []
     for pred in predict:    p.append(np.argmax(pred))
     x = range(len(test))
     fig, axs = plt.subplots(2)
-    fig.suptitle('Vertically stacked subplots')
+    fig.suptitle('Performance (dot are error points)')
     axs[0].scatter(x, test,s=0.5)
     axs[1].scatter(x, p,s=0.5)
     plt.show()
+
 
 def train(train_feature,train_label,test_feature,test_label):
     model = f.create_model()
@@ -28,6 +30,7 @@ def train(train_feature,train_label,test_feature,test_label):
 
     test_loss,test_acc = model.evaluate(train_feature,train_label,verbose=10)
     print(f"loss = {test_loss}, acc = {test_acc}")
+
     if not(os.path.isdir('modle')):
         model.save_weights('modle/modle.w')
     return model
@@ -41,13 +44,6 @@ def main():
     feature  = np.append(p_fea,n_fea[:len(p_fea)],axis=0)
     label = np.append(p_lab,n_lab[:len(p_fea)],axis=0)
 
-    """
-    featuret  = np.append(pt_fea,nt_fea[:len(pt_fea)],axis=0)
-    labelt = np.append(pt_lab,nt_lab[:len(pt_fea)],axis=0)
-
-    feature = np.append(feature,featuret,axis=0)
-    label = np.append(label,labelt,axis=0)
-    """
 
     model = train(feature,label,test_feature,test_toxic_label)
     predict = model.predict(feature)
