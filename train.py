@@ -17,9 +17,12 @@ def test(test,predict):
     for pred in predict:    p.append(np.argmax(pred))
     x = range(len(test))
     fig, axs = plt.subplots(2)
-    fig.suptitle('Performance (dot are error points)')
-    axs[0].scatter(x, test,s=0.5)
-    axs[1].scatter(x, p,s=0.5)
+    fig.suptitle('Performance (dots are error points)')
+    axs[0].scatter(x, test,s=0.5,label="training label")
+    axs[1].scatter(x, p,s=0.5,label="Predict label")
+    #plt.legend()
+    axs[0].legend()
+    axs[1].legend()
     plt.show()
 
 
