@@ -20,7 +20,6 @@ def test(test,predict):
     fig.suptitle('Performance (dots are error points)')
     axs[0].scatter(x, test,s=0.5,label="training label")
     axs[1].scatter(x, p,s=0.5,label="Predict label")
-    #plt.legend()
     axs[0].legend()
     axs[1].legend()
     plt.show()
