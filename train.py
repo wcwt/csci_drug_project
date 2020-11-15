@@ -28,7 +28,7 @@ def test(test,predict):
 def train(train_feature,train_label,test_feature,test_label):
     model = f.create_model()
 
-    model.fit(train_feature,train_label,epochs=8,shuffle=True,batch_size=10)
+    model.fit(train_feature,train_label,epochs=20,shuffle=True,batch_size=5)
 
     test_loss,test_acc = model.evaluate(train_feature,train_label,verbose=10)
     print(f"loss = {test_loss}, acc = {test_acc}")
